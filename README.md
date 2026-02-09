@@ -32,6 +32,13 @@ This project is built using a modern frontend stack to ensure high performance a
 *   **Icons**: [Lucide React](https://lucide.dev/)
 *   **Animations**: [Framer Motion](https://www.framer.com/motion/)
 
+### Backend
+
+*   **Runtime**: [Python](https://www.python.org/)
+*   **Framework**: [FastAPI](https://fastapi.tiangolo.com/)
+*   **Server**: [Uvicorn](https://www.uvicorn.org/)
+*   **Validation**: [Pydantic](https://docs.pydantic.dev/)
+
 ## 📂 Project Structure
 
 ```bash
@@ -76,6 +83,32 @@ Follow these steps to set up the project locally on your machine.
 
 4.  **Open your browser**
     Navigate to `http://localhost:5173` to view the application.
+
+### Backend Setup (Optional)
+
+If you want to run the backend API:
+
+1.  **Navigate to the backend directory**
+    ```bash
+    cd backend
+    ```
+
+2.  **Create a virtual environment**
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows: venv\Scripts\activate
+    ```
+
+3.  **Install requirements**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4.  **Start the server**
+    ```bash
+    uvicorn main:app --reload
+    ```
+    The API will be available at `http://localhost:8000`.
 
 ## 🤝 Contributing
 
