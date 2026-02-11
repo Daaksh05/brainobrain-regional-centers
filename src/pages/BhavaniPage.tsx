@@ -41,7 +41,10 @@ export const BhavaniPage = () => {
             <section className="pt-32 pb-20 px-4">
                 <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
                     <div className="space-y-6">
-                        <span className="px-4 py-2 bg-primary-yellow/20 text-primary-red font-bold rounded-full text-sm">Empowering Young Minds</span>
+                        <div className="flex items-center gap-3">
+                            <img src="/assets/bob_logo.png" alt="Brainobrain" className="h-10 bg-white rounded-lg p-1 shadow-md" />
+                            <span className="px-4 py-2 bg-primary-yellow/20 text-primary-red font-bold rounded-full text-sm">Empowering Young Minds</span>
+                        </div>
                         <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-black">
                             Unlock Your Child's <span className="text-primary-pink">Potential</span> in Bhavani
                         </h1>

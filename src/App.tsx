@@ -48,8 +48,9 @@ export default function App() {
                 <TubesBackground className="absolute inset-0 z-0 opacity-40" />
                 <div className="container relative z-10 px-4 text-center space-y-8">
                     <div className="space-y-4 animate-in fade-in zoom-in duration-700">
-                        <h1 className="text-5xl md:text-8xl font-black tracking-tighter drop-shadow-2xl">
-                            Brainobrain <span className="text-primary-pink">{center.name}</span>
+                        <h1 className="text-5xl md:text-8xl font-black tracking-tighter drop-shadow-2xl flex items-center justify-center gap-4">
+                            <img src="/assets/bob_logo.png" alt="Brainobrain" className="h-16 md:h-24 object-contain bg-white rounded-2xl p-2 shadow-xl" />
+                            <span>Brainobrain <span className="text-primary-pink">{center.name}</span></span>
                         </h1>
                         <p className="max-w-2xl mx-auto text-xl md:text-2xl font-bold text-white/70 uppercase tracking-[0.2em]">
                             Empowering Young Geniuses in {center.district} District
