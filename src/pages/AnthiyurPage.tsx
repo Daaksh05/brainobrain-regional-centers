@@ -70,7 +70,7 @@ export const AnthiyurPage = () => {
                         </ul>
                     </div>
                     <div>
-                        <img src="/assets/team_new.png" alt="Brainobrain Students" className="rounded-3xl shadow-xl" />
+                        <img src="/assets/brain 3.jpeg" alt="Brainobrain Students" className="rounded-3xl shadow-xl" />
                     </div>
                 </div>
             </section>

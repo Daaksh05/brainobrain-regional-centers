@@ -17,6 +17,9 @@ export const Navbar = ({ selectedCenter, onCenterChange }: NavbarProps) => {
     return (
         <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full px-4 md:px-8 py-3 flex justify-between items-center shadow-2xl">
             <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center p-1 overflow-hidden shadow-inner">
+                    <img src="/assets/bob_logo.png" alt="Brainobrain Logo" className="w-full h-full object-contain" />
+                </div>
                 <span className="font-bold text-lg text-white">Brainobrain {currentCenter.name}</span>
             </div>
 
