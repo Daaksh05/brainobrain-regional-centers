@@ -1,11 +1,41 @@
-import React from 'react';
+import React, { useState, FormEvent } from 'react';
 import { Navbar } from '../components/Navbar';
-import { Phone, Mail, MapPin, Clock, CheckCircle2 } from 'lucide-react';
+import { Phone, MapPin, CheckCircle2 } from 'lucide-react';
+import { submitInquiry } from '../lib/firebase';
 
 export const BhavaniPage = () => {
+    const [selectedCenterId, setSelectedCenterId] = useState('bhavani');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error', message: string } | null>(null);
+
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setSubmitStatus(null);
+
+        const formData = new FormData(e.currentTarget);
+        const data = {
+            fullName: formData.get('fullName') as string,
+            age: parseInt(formData.get('age') as string),
+            parentPhone: formData.get('parentPhone') as string,
+            program: formData.get('program') as string,
+            centerName: 'Bhavani'
+        };
+
+        try {
+            await submitInquiry(data);
+            setSubmitStatus({ type: 'success', message: '🎉 Success! We will contact you soon.' });
+            (e.target as HTMLFormElement).reset();
+        } catch (error) {
+            setSubmitStatus({ type: 'error', message: 'Error! Please call us directly.' });
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
     return (
         <div className="min-h-screen bg-white">
-            <Navbar centerName="Brainobrain Bhavani" />
+            <Navbar selectedCenter={selectedCenterId} onCenterChange={setSelectedCenterId} />
 
             {/* Hero Section */}
             <section className="pt-32 pb-20 px-4">
@@ -32,7 +62,7 @@ export const BhavaniPage = () => {
             <section id="about" className="py-20 bg-gray-50">
                 <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
                     <div>
-                        <img src="/assets/classroom_1.png" alt="Classroom" className="rounded-3xl shadow-xl" />
+                        <img src="/assets/brainobrain_about_3.png" alt="Brainobrain Students" className="rounded-3xl shadow-xl" />
                     </div>
                     <div className="space-y-6">
                         <h2 className="text-4xl font-bold">About Brainobrain Bhavani</h2>
@@ -93,10 +123,29 @@ export const BhavaniPage = () => {
                     </div>
                     <div className="bg-white/5 p-8 rounded-3xl backdrop-blur-md border border-white/10">
                         <h3 className="text-2xl font-bold mb-6">Book a Free Trial</h3>
-                        <form className="grid gap-4">
-                            <input type="text" placeholder="Child's Name" className="p-4 bg-white/10 rounded-xl border border-white/10 focus:outline-none focus:border-primary-pink" />
-                            <input type="tel" placeholder="Phone Number" className="p-4 bg-white/10 rounded-xl border border-white/10 focus:outline-none focus:border-primary-pink" />
-                            <button className="py-4 bg-primary-pink text-white font-bold rounded-xl mt-4">Submit Application</button>
+                        <form className="grid gap-4" onSubmit={handleSubmit}>
+                            <input name="fullName" type="text" placeholder="Child's Name" required className="p-4 bg-white/10 rounded-xl border border-white/10 focus:outline-none focus:border-primary-pink text-white" />
+                            <input name="age" type="number" placeholder="Child's Age" required className="p-4 bg-white/10 rounded-xl border border-white/10 focus:outline-none focus:border-primary-pink text-white" />
+                            <input name="parentPhone" type="tel" placeholder="Parent Mobile" required className="p-4 bg-white/10 rounded-xl border border-white/10 focus:outline-none focus:border-primary-pink text-white" />
+                            <select name="program" required className="p-4 bg-white/10 rounded-xl border border-white/10 text-white [&>option]:text-black">
+                                <option value="">Select Program</option>
+                                <option value="Littlebobs">Littlebobs (4-6)</option>
+                                <option value="Brainobrain">Brainobrain (7-14)</option>
+                            </select>
+
+                            {submitStatus && (
+                                <div className={`p-3 rounded-lg text-center font-bold ${submitStatus.type === 'success' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
+                                    {submitStatus.message}
+                                </div>
+                            )}
+
+                            <button
+                                type="submit"
+                                disabled={isSubmitting}
+                                className="py-4 bg-primary-pink text-white font-bold rounded-xl mt-4 disabled:opacity-50"
+                            >
+                                {isSubmitting ? 'Sending...' : 'Submit Application'}
+                            </button>
                         </form>
                     </div>
                 </div>

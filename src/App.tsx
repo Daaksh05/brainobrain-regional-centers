@@ -4,6 +4,7 @@ import { Gallery } from './components/Gallery';
 import { TubesBackground } from './components/ui/neon-flow';
 import { MousePointer2, MapPin, Phone, Clock, ExternalLink, CheckCircle2, Star } from 'lucide-react';
 import { centersData } from './data/centersData';
+import { submitInquiry } from './lib/firebase';
 
 export default function App() {
     const [selectedCenterId, setSelectedCenterId] = useState('bhavani');
@@ -27,24 +28,12 @@ export default function App() {
         };
 
         try {
-            const response = await fetch('/api/inquiry', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
-
-            const result = await response.json();
-
-            if (response.ok) {
-                setSubmitStatus({ type: 'success', message: result.message });
-                (e.target as HTMLFormElement).reset();
-            } else {
-                setSubmitStatus({ type: 'error', message: result.detail || 'Something went wrong. Please try again.' });
-            }
+            await submitInquiry(data);
+            setSubmitStatus({ type: 'success', message: '🎉 Inquiry submitted successfully! We will contact you soon.' });
+            (e.target as HTMLFormElement).reset();
         } catch (error) {
-            setSubmitStatus({ type: 'error', message: 'Failed to connect to the server.' });
+            console.error('Firebase submission error:', error);
+            setSubmitStatus({ type: 'error', message: 'Something went wrong. Please try again or call us directly.' });
         } finally {
             setIsSubmitting(false);
         }
@@ -71,9 +60,9 @@ export default function App() {
                         <a href="#contact" className="px-10 py-5 bg-primary-pink text-white font-black rounded-full shadow-[0_0_30px_rgba(236,0,140,0.5)] hover:scale-105 transition-all">
                             Send Inquiry
                         </a>
-                        <button className="px-10 py-5 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white font-black rounded-full transition-all">
+                        <a href="/assets/1000210516.pdf" download className="px-10 py-5 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white font-black rounded-full transition-all">
                             Download Prospectus
-                        </button>
+                        </a>
                     </div>
 
                     <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40 animate-pulse">
@@ -141,7 +130,7 @@ export default function App() {
                     </div>
                     <div className="relative group animate-in slide-in-from-right duration-700">
                         <div className="absolute -inset-4 bg-primary-pink/20 rounded-[3rem] blur-2xl group-hover:bg-primary-pink/30 transition-all"></div>
-                        <img src="/assets/classroom_1.png" alt="Classroom" className="relative rounded-[3rem] border border-white/10 shadow-2xl w-full" />
+                        <img src="/assets/brainobrain_about_3.png" alt="Brainobrain Students" className="relative rounded-[3rem] border border-white/10 shadow-2xl w-full" />
                     </div>
                 </div>
             </section>

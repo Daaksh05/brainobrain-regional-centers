@@ -1,11 +1,41 @@
-import React from 'react';
+import React, { useState, FormEvent } from 'react';
 import { Navbar } from '../components/Navbar';
 import { Phone, MapPin, CheckCircle2 } from 'lucide-react';
+import { submitInquiry } from '../lib/firebase';
 
 export const MetturPage = () => {
+    const [selectedCenterId, setSelectedCenterId] = useState('mettur');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error', message: string } | null>(null);
+
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setSubmitStatus(null);
+
+        const formData = new FormData(e.currentTarget);
+        const data = {
+            fullName: formData.get('fullName') as string,
+            age: parseInt(formData.get('age') as string),
+            parentPhone: formData.get('parentPhone') as string,
+            program: formData.get('program') as string,
+            centerName: 'Mettur'
+        };
+
+        try {
+            await submitInquiry(data);
+            setSubmitStatus({ type: 'success', message: '🎉 Success! We will contact you soon.' });
+            (e.target as HTMLFormElement).reset();
+        } catch (error) {
+            setSubmitStatus({ type: 'error', message: 'Error! Please call us directly.' });
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
     return (
         <div className="min-h-screen bg-white">
-            <Navbar centerName="Brainobrain Mettur" />
+            <Navbar selectedCenter={selectedCenterId} onCenterChange={setSelectedCenterId} />
 
             <section className="pt-32 pb-20 px-4">
                 <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
@@ -52,7 +82,7 @@ export const MetturPage = () => {
                         <div className="space-y-6">
                             <div className="flex gap-4">
                                 <MapPin className="text-primary-yellow" />
-                                <div><p className="font-bold">Mettur Center</p><p className="text-gray-400">Location Details to be Confirmed, Salem</p></div>
+                                <div><p className="font-bold">Mettur Center</p><p className="text-gray-400">Kill Shot Academy, Opp to SE Academy, 3 Corner, Mettur Dam 1</p></div>
                             </div>
                             <div className="flex gap-4">
                                 <Phone className="text-primary-yellow" />
@@ -62,10 +92,29 @@ export const MetturPage = () => {
                     </div>
                     <div className="bg-white/5 p-8 rounded-3xl backdrop-blur-md border border-white/10">
                         <h3 className="text-2xl font-bold mb-6">Trial Class Booking</h3>
-                        <form className="grid gap-4">
-                            <input type="text" placeholder="Name" className="p-4 bg-white/10 rounded-xl border border-white/10" />
-                            <input type="tel" placeholder="Mobile" className="p-4 bg-white/10 rounded-xl border border-white/10" />
-                            <button className="py-4 bg-primary-green text-white font-bold rounded-xl mt-4">Request Callback</button>
+                        <form className="grid gap-4" onSubmit={handleSubmit}>
+                            <input name="fullName" type="text" placeholder="Child's Name" required className="p-4 bg-white/10 rounded-xl border border-white/10 text-white" />
+                            <input name="age" type="number" placeholder="Child's Age" required className="p-4 bg-white/10 rounded-xl border border-white/10 text-white" />
+                            <input name="parentPhone" type="tel" placeholder="Parent Mobile" required className="p-4 bg-white/10 rounded-xl border border-white/10 text-white" />
+                            <select name="program" required className="p-4 bg-white/10 rounded-xl border border-white/10 text-white [&>option]:text-black">
+                                <option value="">Select Program</option>
+                                <option value="Littlebobs">Littlebobs (4-6)</option>
+                                <option value="Brainobrain">Brainobrain (7-14)</option>
+                            </select>
+
+                            {submitStatus && (
+                                <div className={`p-3 rounded-lg text-center font-bold ${submitStatus.type === 'success' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
+                                    {submitStatus.message}
+                                </div>
+                            )}
+
+                            <button
+                                type="submit"
+                                disabled={isSubmitting}
+                                className="py-4 bg-primary-green text-white font-bold rounded-xl mt-4 disabled:opacity-50"
+                            >
+                                {isSubmitting ? 'Sending...' : 'Request Callback'}
+                            </button>
                         </form>
                     </div>
                 </div>

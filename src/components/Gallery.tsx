@@ -6,6 +6,9 @@ const images = [
     '/assets/gallery/brain 4.jpeg',
     '/assets/gallery/brain 6.jpeg',
     '/assets/gallery/img1.jpg',
+    '/assets/gallery/image 7.jpeg',
+    '/assets/gallery/image 8.jpeg',
+    '/assets/gallery/image 9.jpeg',
 ];
 
 export const Gallery: FC = () => {
@@ -31,8 +34,7 @@ export const Gallery: FC = () => {
                     {images.map((src, index) => (
                         <div
                             key={index}
-                            className={`group relative rounded-[2rem] overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm shadow-2xl transition-all duration-500 hover:shadow-[0_0_40px_rgba(236,0,140,0.3)] hover:-translate-y-2 ${index === 0 || index === 3 ? 'md:col-span-2' : ''
-                                }`}
+                            className={`group relative rounded-[2rem] overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm shadow-2xl transition-all duration-500 hover:shadow-[0_0_40px_rgba(236,0,140,0.3)] hover:-translate-y-2`}
                         >
                             <img
                                 src={src}

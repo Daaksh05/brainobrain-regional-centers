@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Menu, X, ChevronDown, MapPin } from 'lucide-react';
 import { centersData } from '../data/centersData';
+import { useNavigate } from 'react-router-dom';
 
 interface NavbarProps {
     selectedCenter: string;
@@ -11,6 +12,7 @@ export const Navbar = ({ selectedCenter, onCenterChange }: NavbarProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const currentCenter = centersData[selectedCenter];
+    const navigate = useNavigate();
 
     return (
         <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full px-4 md:px-8 py-3 flex justify-between items-center shadow-2xl">
@@ -45,6 +47,7 @@ export const Navbar = ({ selectedCenter, onCenterChange }: NavbarProps) => {
                                     onClick={() => {
                                         onCenterChange(center.id);
                                         setIsDropdownOpen(false);
+                                        navigate(`/${center.id === 'bhavani' && window.location.pathname === '/' ? '' : center.id}`);
                                     }}
                                     className={`w-full flex flex-col items-start p-3 rounded-xl transition-colors ${selectedCenter === center.id ? 'bg-primary-pink/20 text-primary-pink' : 'text-white hover:bg-white/5'
                                         }`}
