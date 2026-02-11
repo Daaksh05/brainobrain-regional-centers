@@ -1,15 +1,26 @@
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Gallery } from './components/Gallery';
 import { TubesBackground } from './components/ui/neon-flow';
 import { MousePointer2, MapPin, Phone, Clock, ExternalLink, CheckCircle2, Star } from 'lucide-react';
 import { centersData } from './data/centersData';
 import { submitInquiry } from './lib/firebase';
+import { useParams } from 'react-router-dom';
 
 export default function App() {
-    const [selectedCenterId, setSelectedCenterId] = useState('bhavani');
+    const { centerId } = useParams<{ centerId: string }>();
+    const [selectedCenterId, setSelectedCenterId] = useState(centerId || 'bhavani');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error', message: string } | null>(null);
+
+    // Sync selected center when URL param changes
+    useEffect(() => {
+        if (centerId && centersData[centerId]) {
+            setSelectedCenterId(centerId);
+        } else if (!centerId) {
+            setSelectedCenterId('bhavani');
+        }
+    }, [centerId]);
 
     const center = centersData[selectedCenterId];
 
@@ -41,7 +52,7 @@ export default function App() {
 
     return (
         <div className="min-h-screen bg-slate-950 text-white font-sans selection:bg-primary-pink selection:text-white">
-            <Navbar selectedCenter={selectedCenterId} onCenterChange={setSelectedCenterId} />
+            <Navbar selectedCenter={selectedCenterId} />
 
             {/* Hero Section */}
             <section className="relative h-screen w-full flex items-center justify-center pt-20">

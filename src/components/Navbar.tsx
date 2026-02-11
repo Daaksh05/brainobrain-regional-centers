@@ -5,10 +5,9 @@ import { useNavigate } from 'react-router-dom';
 
 interface NavbarProps {
     selectedCenter: string;
-    onCenterChange: (centerId: string) => void;
 }
 
-export const Navbar = ({ selectedCenter, onCenterChange }: NavbarProps) => {
+export const Navbar = ({ selectedCenter }: NavbarProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const currentCenter = centersData[selectedCenter];
@@ -48,9 +47,8 @@ export const Navbar = ({ selectedCenter, onCenterChange }: NavbarProps) => {
                                 <button
                                     key={center.id}
                                     onClick={() => {
-                                        onCenterChange(center.id);
                                         setIsDropdownOpen(false);
-                                        navigate(`/${center.id === 'bhavani' && window.location.pathname === '/' ? '' : center.id}`);
+                                        navigate(`/${center.id === 'bhavani' ? '' : center.id}`);
                                     }}
                                     className={`w-full flex flex-col items-start p-3 rounded-xl transition-colors ${selectedCenter === center.id ? 'bg-primary-pink/20 text-primary-pink' : 'text-white hover:bg-white/5'
                                         }`}
