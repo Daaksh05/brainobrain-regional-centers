@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import { useState, FormEvent } from 'react';
 import { Navbar } from '../components/Navbar';
 import { Phone, MapPin, CheckCircle2 } from 'lucide-react';
 import { submitInquiry } from '../lib/firebase';

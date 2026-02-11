@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import { useState, FormEvent } from 'react';
 import { Navbar } from './components/Navbar';
 import { Gallery } from './components/Gallery';
 import { TubesBackground } from './components/ui/neon-flow';

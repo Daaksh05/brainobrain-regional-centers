@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 const images = [
     '/assets/gallery/brain 1.jpeg',

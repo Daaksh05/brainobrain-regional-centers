@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Menu, X, ChevronDown, MapPin } from 'lucide-react';
 import { centersData } from '../data/centersData';
 import { useNavigate } from 'react-router-dom';
