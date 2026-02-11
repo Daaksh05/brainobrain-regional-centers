@@ -53,7 +53,7 @@ export const BhavaniPage = () => {
                     </div>
                     <div className="relative">
                         <div className="absolute -inset-4 bg-primary-yellow rounded-[2rem] rotate-3 opacity-20"></div>
-                        <img src="/assets/hero_kids.png" alt="Happy Kids" className="relative rounded-[2rem] shadow-2xl w-full" />
+                        <img src="/assets/hero_new.png" alt="Happy Kids" className="relative rounded-[2rem] shadow-2xl w-full" />
                     </div>
                 </div>
             </section>
@@ -62,7 +62,7 @@ export const BhavaniPage = () => {
             <section id="about" className="py-20 bg-gray-50">
                 <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
                     <div>
-                        <img src="/assets/brainobrain_about_3.png" alt="Brainobrain Students" className="rounded-3xl shadow-xl" />
+                        <img src="/assets/team_new.png" alt="Brainobrain Students" className="rounded-3xl shadow-xl" />
                     </div>
                     <div className="space-y-6">
                         <h2 className="text-4xl font-bold">About Brainobrain Bhavani</h2>

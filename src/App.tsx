@@ -130,7 +130,7 @@ export default function App() {
                     </div>
                     <div className="relative group animate-in slide-in-from-right duration-700">
                         <div className="absolute -inset-4 bg-primary-pink/20 rounded-[3rem] blur-2xl group-hover:bg-primary-pink/30 transition-all"></div>
-                        <img src="/assets/brainobrain_about_3.png" alt="Brainobrain Students" className="relative rounded-[3rem] border border-white/10 shadow-2xl w-full" />
+                        <img src="/assets/team_new.png" alt="Brainobrain Students" className="relative rounded-[3rem] border border-white/10 shadow-2xl w-full" />
                     </div>
                 </div>
             </section>

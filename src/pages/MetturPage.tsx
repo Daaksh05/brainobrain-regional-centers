@@ -51,7 +51,7 @@ export const MetturPage = () => {
                         </div>
                     </div>
                     <div className="relative">
-                        <img src="/assets/hero_kids.png" alt="Happy Kids" className="rounded-[2rem] shadow-2xl w-full" />
+                        <img src="/assets/hero_new.png" alt="Happy Kids" className="rounded-[2rem] shadow-2xl w-full" />
                     </div>
                 </div>
             </section>
@@ -59,7 +59,7 @@ export const MetturPage = () => {
             <section id="about" className="py-20 bg-gray-50">
                 <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
                     <div>
-                        <img src="/assets/classroom_2.png" alt="Classroom" className="rounded-3xl shadow-xl" />
+                        <img src="/assets/team_new.png" alt="Classroom" className="rounded-3xl shadow-xl" />
                     </div>
                     <div className="space-y-6">
                         <h2 className="text-4xl font-bold">About Mettur Center</h2>

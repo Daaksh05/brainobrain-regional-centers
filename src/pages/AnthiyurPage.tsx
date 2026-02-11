@@ -51,7 +51,7 @@ export const AnthiyurPage = () => {
                         </div>
                     </div>
                     <div className="relative">
-                        <img src="/assets/hero_kids.png" alt="Happy Kids" className="rounded-[2rem] shadow-2xl w-full" />
+                        <img src="/assets/hero_new.png" alt="Happy Kids" className="rounded-[2rem] shadow-2xl w-full" />
                     </div>
                 </div>
             </section>
@@ -70,7 +70,7 @@ export const AnthiyurPage = () => {
                         </ul>
                     </div>
                     <div>
-                        <img src="/assets/brainobrain_about_3.png" alt="Brainobrain Students" className="rounded-3xl shadow-xl" />
+                        <img src="/assets/team_new.png" alt="Brainobrain Students" className="rounded-3xl shadow-xl" />
                     </div>
                 </div>
             </section>
